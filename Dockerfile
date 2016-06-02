@@ -1,7 +1,6 @@
 FROM java:8-jre
 MAINTAINER yannick.houbrix@gmail.com
 
-ENV HUB_PORT 8080
 ENV HUB_VERSION 2.0
 ENV HUB_BUILD 244
 ENV HUB_DIST_NAME hub-ring-bundle-${HUB_VERSION}.${HUB_BUILD}
@@ -21,10 +20,10 @@ RUN bin/hub.sh configure \
     --data-dir    ${HUB_HOME}/data \
     --logs-dir    ${HUB_HOME}/log \
     --temp-dir    ${HUB_HOME}/tmp \
-    --listen-port $HUB_PORT \
+    --listen-port 8080 \
     --base-url    http://localhost/
 
 ENTRYPOINT ["bin/hub.sh"]
 CMD ["run"]
-EXPOSE $HUB_PORT
+EXPOSE 8080
 VOLUME ["${HUB_HOME}/backups", "${HUB_HOME}/data", "${HUB_HOME}/log", "${HUB_HOME}/tmp"]
